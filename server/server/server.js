@@ -4,10 +4,10 @@ import cors from 'cors'
 import morgan from 'morgan'
 import 'babel-polyfill'
 import images from '../routes/image-route'
+require('dotenv').config()
 
 /* Dev */
 import { yellow, redf } from '../logger'
-
 
 const app = express()
 const path = require('path')
@@ -31,8 +31,8 @@ app.get('/api', (req, res) => {
 })
 
 if (!module.parent) {
-  app.listen(3030, () => {
-    console.log('Server is listening on port 3030')
+  app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`)
   })
 }
 

@@ -5,30 +5,16 @@ import { red, blue, yellow } from '../logger'
 import path from 'path'
 import fs from 'fs'
 import S3 from 'aws-sdk/clients/s3'
+import { Route53Resolver } from 'aws-sdk/clients/all';
+
+require('dotenv').config()
+
 
 const router = express.Router()
-const bucketName = 'upload-to-s3-ex'
-const bucketRegion = 'us-west-2'
+const bucketName = process.env.BUCKET_NAME
+const bucketRegion = process.env.BUCKET_REGION
 const baseUrl = `https://s3-${bucketRegion}.amazonaws.com/${bucketName}/`
 const s3 = new S3({region: bucketRegion})
-
-const getDateAndTime = () => {
-  var today = new Date()
-  var dd = today.getDate()
-  var mm = today.getMonth() + 1 // January is 0!
-  var yyyy = today.getFullYear()
-
-  if (dd < 10) {
-    dd = '0' + dd
-  }
-
-  if (mm < 10) {
-    mm = '0' + mm
-  }
-
-  today = mm + '-' + dd + '-' + yyyy + '-' + today.getTime()
-  return today
-}
 
 const checkDirectoryExists = (dir) => {
   try {
@@ -83,6 +69,21 @@ router.delete('/:key', async (req, res) => {
 
 })
 
+const parseFileName = (fullName) => {
+  const lastDot = fullName.lastIndexOf('.')
+  const len = fullName.length
+  const name = fullName.slice(0, lastDot)
+  const extension = fullName.slice(lastDot + 1, len)
+  return { name, extension}
+}
+
+const addTimestamp = (fileName) => {
+  yellow('fileName', fileName)
+  const fileParts = parseFileName(fileName)
+  return `${fileParts.name}-${Date.now()}.${fileParts.extension}`
+
+
+}
 
 
 router.post('/', async (req, res) => {
@@ -96,9 +97,11 @@ router.post('/', async (req, res) => {
     checkDirectoryExists(dirName)
 
     form.on('file', function (field, file) {
-      red('** form.on.file')
       const fname = file.name
-      const newName = fname.substring(0, fname.lastIndexOf('.')) + '-' + getDateAndTime() + fname.substring(fname.lastIndexOf('.'))
+
+      // const newName = fname.substring(0, fname.lastIndexOf('.')) + '-' + getDateAndTime() + fname.substring(fname.lastIndexOf('.'))
+      const newName = addTimestamp(fname)
+      yellow('newName', newName)
       newFileName = path.join(form.uploadDir, newName)
       fs.rename(file.path, newFileName, function () {
         fs.readFile(newFileName, (err, data) => {
@@ -106,7 +109,12 @@ router.post('/', async (req, res) => {
           const s3 = new S3()
           const params = { Bucket: bucketName, Key: newName, Body: data }
           s3.upload(params, function (err, data) {
-            red('done', `${err}, ${data}`)
+            // should be checking for an error here :(
+
+            // res.status(400).send(e)
+            if (err) {
+              red('err', err)
+            }
             const ret = pick(['Location', 'Key'], data)
             res.send(ret)
           })

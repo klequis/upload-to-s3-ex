@@ -3,6 +3,7 @@
 
 ## To Do
 - [ ] did not capture the focus and hover styles for the Raised button - do so
+- [ ] handle s3 upload error
 - [ ] change request-reducers.imagesList to 'images'
 - [ ] finish readme
 
