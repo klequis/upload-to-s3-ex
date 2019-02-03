@@ -43,7 +43,7 @@ class ImagesList extends React.Component {
     }
 
     return (
-      <div className={classes.wrapper}>
+      <div id='ImagesList-wrapper' className={classes.wrapper}>
         {
           images.map(i => {
             return (
@@ -62,7 +62,9 @@ class ImagesList extends React.Component {
 }
 
 const styles = theme => ({
-
+  wrapper: {
+    backgroundColor: 'green',
+  }
 })
 
 const actions = { imagesListRequest, imagesDeleteOneRequest }

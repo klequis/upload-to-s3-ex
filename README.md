@@ -2,6 +2,7 @@
 
 
 ## To Do
+- [ ] files are being uploaded but UI is not showing them. Error in console: Failed to load resource ...
 - [ ] did not capture the focus and hover styles for the Raised button - do so
 - [ ] handle s3 upload error
 - [ ] change request-reducers.imagesList to 'images'
@@ -10,7 +11,11 @@
 ## Requirements
 1. An AWS account
 1. An AWS S3 bucket configured to accept uploads
-1. Credentials: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html
+1. Credentials - in home directory
+### Helpful links
+- https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html
+- https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html
+- https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html
 
 
 ## Actions

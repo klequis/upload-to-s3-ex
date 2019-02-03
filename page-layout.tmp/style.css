@@ -1,0 +1,35 @@
+.body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.header {
+  background-color: red;
+  min-height: 200px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: green;
+}
+
+.footer {
+  background-color: blue;
+  min-height: 200px;
+}
+
+.main {
+  background-color: #00b200;
+  min-height: 700px;
+}
+
+.nav {
+  background-color: #00e500;
+}
+
+.aside {
+  background-color: #004c00;
+}

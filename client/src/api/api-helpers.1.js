@@ -10,7 +10,7 @@ const rejectErrors = (res) => {
 
   return Promise.reject({
     statusText: res.statusText,
-    status: res.status,
+    status,
     error: res.json()
   })
 }
@@ -41,16 +41,19 @@ export const fetchJson = (url, options = {}) => {
   )
 }
 
-export const fetchUploadImage = (url, options = {}) => (
-  fetch(url, {
-    ...options,
-    headers: {
-      ...options.headers,
-      'Accept': 'application/json',
-    },
-  })
-    .then(rejectErrors)
-    .then(res => res.json())
-)
+export const fetchUploadImage = (url, options = {}) => {
+  pink('fetchUploadIamge: url', url)
+  return (
+    fetch(url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        'Accept': 'application/json',
+      },
+    })
+      .then(rejectErrors)
+      .then(res => res.json())
+  )
+}
 
 export default { fetchJson, fetchUploadImage }

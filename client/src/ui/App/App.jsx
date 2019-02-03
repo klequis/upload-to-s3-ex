@@ -36,14 +36,15 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-
+    backgroundColor: 'purple',
     // paddingTop: '3%',
 
   },
   main: {
     padding: '3%',
     // backgroundColor: 'red',
-    height: '100%',
+    // minHeight: '100%',
+    backgroundColor: 'red'
   },
   title: {
     fontSize: '2em',

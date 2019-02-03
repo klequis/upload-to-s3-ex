@@ -1,37 +1,89 @@
 import express from 'express'
 import { pick, merge } from 'ramda'
 import formidable from 'formidable'
-import { red, blue, yellow } from '../logger'
 import path from 'path'
-import fs from 'fs'
 import S3 from 'aws-sdk/clients/s3'
-import { Route53Resolver } from 'aws-sdk/clients/all';
+import {
+  fileExists,
+  addTimestampToFileName,
+  dirExists,
+  makeDir,
+  readFile,
+  renameFile,
+  unlinkFile,
+} from '../lib/fileSys'
+import {
+  isUrl,
+} from '../lib/isUrl'
+import {
+  hasProp,
+} from '../lib/hasProp'
+
+import { red, blue, yellow, green } from '../logger'
 
 require('dotenv').config()
-
 
 const router = express.Router()
 const bucketName = process.env.BUCKET_NAME
 const bucketRegion = process.env.BUCKET_REGION
 const baseUrl = `https://s3-${bucketRegion}.amazonaws.com/${bucketName}/`
-const s3 = new S3({region: bucketRegion})
-
-const checkDirectoryExists = (dir) => {
-  try {
-    fs.statSync(dir)
-  } catch (e) {
-    fs.mkdirSync(dir)
-  }
-}
+const s3 = new S3({ apiVersion: '2006-03-01', region: bucketRegion })
+const errorTag = 'Error (image-route: form.on): '
 
 const shapeData = (data) => {
   const withUrl = data.Contents.map(i => {
     return merge(i, { url: `${baseUrl}${i.Key}`})
   })
-  const o = { images: withUrl, nextToken: data.NextContinuationToken}
-  // yellow('o', o)
-  return o
+  return { images: withUrl, nextToken: data.NextContinuationToken}
 }
+
+const checkData = (obj) => {
+  if (hasProp('Key', obj) && hasProp('Location', obj)) {
+    if ((obj.Key.length > 0) && isUrl(obj.Location)) {
+      return true
+    }
+  } else {
+    return false
+  }
+}
+
+router.post('/', async (req, res) => {
+  try {
+    const form = new formidable.IncomingForm()
+    let newFileName = undefined
+    let dirName = 'uploads'
+    form.multiples = true
+    form.uploadDir = path.join(__dirname, `../${dirName}`)
+    form.parse(req)
+    if (!await dirExists(dirName)) {
+      await makeDir(dirName)
+    }
+    form.on('file', async (field, file) => {
+      const fname = file.name // white-horse.jpg
+      const newName = addTimestampToFileName(fname)
+      newFileName = path.join(form.uploadDir, newName)
+      await renameFile(file.path, newFileName)
+      const data = await readFile(newFileName)
+      const params = { Bucket: bucketName, Key: newName, Body: data }
+      const upload = await s3.upload(params).promise()
+      if (!checkData) {
+        res.status(400).send({ error: `${errorTag} Unknown returned data ${upload}`})
+      }
+      const ret = pick(['Location', 'Key'], upload)
+      unlinkFile(newFileName)
+      res.send(ret)
+    })
+    form.on('error', function (err) {
+      red('Error (image-route: form.on)', err)
+    })
+
+  } catch (e) {
+    // eslint-disable-next-line
+    red("ERROR (image-route.router.post('/')", e)
+    res.status(400).send(e)
+  }
+})
+
 
 router.get('/', async (req, res) => {
   const maxKeys = 10
@@ -53,7 +105,7 @@ router.get('/', async (req, res) => {
 router.delete('/:key', async (req, res) => {
   try {
     const key = req.params.key
-    yellow('delete: key', key)
+    // yellow('delete: key', key)
     const params = {
       Bucket: bucketName,
       Key: key,
@@ -67,79 +119,6 @@ router.delete('/:key', async (req, res) => {
     res.status(400).send()
   }
 
-})
-
-const parseFileName = (fullName) => {
-  const lastDot = fullName.lastIndexOf('.')
-  const len = fullName.length
-  const name = fullName.slice(0, lastDot)
-  const extension = fullName.slice(lastDot + 1, len)
-  return { name, extension}
-}
-
-const addTimestamp = (fileName) => {
-  yellow('fileName', fileName)
-  const fileParts = parseFileName(fileName)
-  return `${fileParts.name}-${Date.now()}.${fileParts.extension}`
-
-
-}
-
-
-router.post('/', async (req, res) => {
-  try {
-    const form = new formidable.IncomingForm()
-    let newFileName = undefined
-    let dirName = 'uploads'
-
-    form.multiples = true
-    form.uploadDir = path.join(__dirname, `../${dirName}`)
-    checkDirectoryExists(dirName)
-
-    form.on('file', function (field, file) {
-      const fname = file.name
-
-      // const newName = fname.substring(0, fname.lastIndexOf('.')) + '-' + getDateAndTime() + fname.substring(fname.lastIndexOf('.'))
-      const newName = addTimestamp(fname)
-      yellow('newName', newName)
-      newFileName = path.join(form.uploadDir, newName)
-      fs.rename(file.path, newFileName, function () {
-        fs.readFile(newFileName, (err, data) => {
-          if (err) throw err
-          const s3 = new S3()
-          const params = { Bucket: bucketName, Key: newName, Body: data }
-          s3.upload(params, function (err, data) {
-            // should be checking for an error here :(
-
-            // res.status(400).send(e)
-            if (err) {
-              red('err', err)
-            }
-            const ret = pick(['Location', 'Key'], data)
-            res.send(ret)
-          })
-        })
-        fs.unlink(newFileName, (err) => {
-          if (err) {
-            red('error while deleting', err)
-          }
-          // console.log('Successfully deleted ', newFileName)
-        })
-      })
-    })
-    form.on('error', function (err) {
-      red('An error has occured: \n' + err)
-    })
-    form.on('end', function () {
-      // red('** form.on.end')
-      // res.status(200).send({"message": "done"})
-    })
-    form.parse(req)
-  } catch (e) {
-    // red('events.route: post', e)
-    red('error', e)
-    res.status(400).send(e)
-  }
 })
 
 export default router
