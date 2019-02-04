@@ -12,7 +12,7 @@ const Row = ({ classes, deleteImage, image }) => {
       </div>
 
       <div className={classes.name}>
-        <div>{image.Key}</div>
+        <div className={classes.nameText}>{image.Key}</div>
         {/* {image.Key} */}
       </div>
 
@@ -68,25 +68,28 @@ const styles = theme => {
       color: 'white',
 
       padding: 8,
-      // display: 'flex',
-      // alignItems: 'center',
+      display: 'flex',
+      alignItems: 'center',
       verticalAlign: 'middle',
       //
-      textOverflow: 'ellipsis',
-      overflow: 'hidden',
-      whiteSpace: 'nowrap',
-      flexBasis: '50%',
+
+      flexBasis: '60%',
+      minWidth: 0,
       backgroundColor:'blue',
     },
     nameText: {
+      textOverflow: 'ellipsis',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
 
     },
     button: {
       display: 'flex',
       alignItems: 'center',
+      justifyContent: 'center',
 
       //
-      flexBasis: '20%',
+      flexBasis: '10%',
     }
   }
 }

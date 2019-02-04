@@ -68,6 +68,7 @@ const styles = {
     marginLeft: 0,
     marginRight: 0,
     marginTop: 0,
+    outline: 'none',
     outlineColor: borderColor,
     outlineStyle: 'none',
     outlineWidth: 0,
@@ -96,10 +97,15 @@ const styles = {
     MozAppearance: 'button',
     MozUserSelect: 'none',
     '&:hover': {
-      // backgroundColor: 'rgb(157, 0, 56)',
-
       backgroundColor: 'rgb(255,0,80)',
     },
+    '&:active': {
+      boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
+      outline: 'none',
+    },
+    // '&:selected': {
+    //   backgroundColor: 'green',
+    // },
   },
 }
 
