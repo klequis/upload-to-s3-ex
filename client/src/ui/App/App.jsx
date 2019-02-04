@@ -10,14 +10,14 @@ class App extends React.Component {
     const { classes } = this.props
     return (
       <div id='App-wrapper-main' className={classes.wrapper}>
-          <header>
+          <header className={classes.header}>
             <Text h1 align='center' className={classes.title}>Upload Images to AWS S3</Text>
           </header>
           <main className={classes.main}>
             <UploadImage />
             <ImagesList />
           </main>
-          <footer>
+          <footer className={classes.footer}>
             <Footer />
           </footer>
       </div>
@@ -25,26 +25,29 @@ class App extends React.Component {
   }
 }
 
-const styles = theme => ({
-  background: {
-    // height: '100vh',
+// flex: grow, shrink, basis
 
-  },
+const styles = theme => ({
   wrapper: {
-    // width: '100%',
-    height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    height: '100vh',
     backgroundColor: 'purple',
-    // paddingTop: '3%',
-
+  },
+  header: {
+    backgroundColor: 'red',
+    flexBasis: '20%',
+    flexShrink: 0,
   },
   main: {
     padding: '3%',
-    // backgroundColor: 'red',
-    // minHeight: '100%',
-    backgroundColor: 'red'
+    backgroundColor: 'green',
+    flexBasis: '60%',
+
+  },
+  footer: {
+    backgroundColor: 'blue',
+    flexBasis: '20%',
   },
   title: {
     fontSize: '2em',

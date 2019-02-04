@@ -11,10 +11,10 @@ import {
   getUploadedImageUrl,
   getUploadedImageName,
 } from 'store/selectors/image-selectors'
-import DropzoneDefault from './DropzoneDefault'
-import DropzoneReject from './DropzoneReject'
-import DropzoneAccept from './DropzoneAccept'
-
+import DropTarget from './DropTarget'
+// import DropzoneDefault from './DropzoneDefault'
+// import DropzoneReject from './DropzoneReject'
+// import DropzoneAccept from './DropzoneAccept'
 
 class UploadImage extends React.Component {
   constructor(props) {
@@ -55,10 +55,10 @@ class UploadImage extends React.Component {
             >
               {({ isDragActive, isDragAccept }) => {
                 if (isDragActive) {
-                  return isDragAccept ? <DropzoneAccept /> : <DropzoneReject />
+                  return isDragAccept ? <DropTarget state='accept' /> : <DropTarget state='reject'/>
                   // return <div></div>
                 } else {
-                  return <DropzoneDefault />
+                  return <DropTarget state='default' />
                 }
               }}
             </Dropzone>
@@ -80,47 +80,22 @@ const rejectStyle = {
 }
 
 const dropzoneStyle = {
-  // backgroundColor: 'transparent',
   backgroundColor: 'orange',
   width: '100%',
   height: '100%',
-  // display: 'flex',
-  // alignItems: 'center',
-  // justifyContent: 'center',
-  // flexFlow: 'column nowrap'
 }
 
 const styles = theme => ({
   wrapper: {
+    backgroundColor: 'orange',
     width: '100%',
-    // height: 'auto',
-    display: 'flex',
-    // backgroundColor: 'orange',
-    justifyContent: 'center',
-    minHeight: 200,
-    padding: '20px 0'
-  },
-  dropZone: {
-    width: '40%',
-  },
-  media: {
-    height: 140
   },
   fab: {
     position: 'absolute',
     bottom: theme.spacing.unit * 2,
     right: theme.spacing.unit * 2,
     zIndex: '1',
-
   },
-  imageDiv: {
-    position: 'relative',
-    zIndex: '0',
-    backgroundColor: 'blue',
-    maxWidth: 300,
-  },
-
-
 })
 
 const mapStateToProps = (state) => {
@@ -129,7 +104,6 @@ const mapStateToProps = (state) => {
     // uploadedImageUrl: uploadSelectors.getUploadedImageUrl(state),
     uploadedImageUrl: getUploadedImageUrl(state),
     uploadedImageName: getUploadedImageName(state),
-
   }
 }
 

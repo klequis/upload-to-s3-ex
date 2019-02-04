@@ -30,7 +30,9 @@ const styles = theme => ({
       },
     },
     body: {
-      height: '100vh',
+      // height: '100vh',
+      // display: 'flex',
+      // flexDirection: 'column',
       backgroundColor: '#212121',
       margin: 0,
       padding: 0,
@@ -52,7 +54,7 @@ const styles = theme => ({
       margin: 0,
     },
     '#root': {
-      height: '100%',
+      // height: '100%',
     }
   },
 
