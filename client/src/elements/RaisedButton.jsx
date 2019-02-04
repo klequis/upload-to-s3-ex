@@ -22,7 +22,9 @@ const RaisedButton = ({ children, classes, onClick }) => {
 // const borderColor = 'rgb(255, 255, 255)'
 
 // new
-const backgroundColor = '#9d0038'
+// const backgroundColor = '#9d0038'
+// const backgroundColor = 'rgb(255,0,80)'
+const backgroundColor = 'rgb(157, 0, 56)'
 const borderColor = 'rgb(255, 255, 255)'
 
 const styles = {
@@ -93,6 +95,11 @@ const styles = {
     zIndex: 1,
     MozAppearance: 'button',
     MozUserSelect: 'none',
+    '&:hover': {
+      // backgroundColor: 'rgb(157, 0, 56)',
+
+      backgroundColor: 'rgb(255,0,80)',
+    },
   },
 }
 
