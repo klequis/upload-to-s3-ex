@@ -2,7 +2,8 @@
 
 
 ## To Do
-- [ ] files are being uploaded but UI is not showing them. Error in console: Failed to load resource ...
+- [ ] vertically center name text in row. How to use flex box with textOverflow?
+- [x] files are being uploaded but UI is not showing them. Error in console: Failed to load resource ...
 - [ ] did not capture the focus and hover styles for the Raised button - do so
 - [ ] handle s3 upload error
 - [ ] change request-reducers.imagesList to 'images'

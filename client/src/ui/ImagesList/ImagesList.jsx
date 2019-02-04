@@ -63,7 +63,8 @@ class ImagesList extends React.Component {
 
 const styles = theme => ({
   wrapper: {
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
+    // padding: '16px 0'
   }
 })
 

@@ -11,7 +11,7 @@ class App extends React.Component {
     return (
       <div id='App-wrapper-main' className={classes.wrapper}>
           <header className={classes.header}>
-            <Text h1 align='center' className={classes.title}>Upload Images to AWS S3</Text>
+            <Text h1 noMargin align='center' className={classes.title}>Upload Images to AWS S3</Text>
           </header>
           <main className={classes.main}>
             <UploadImage />
@@ -25,28 +25,25 @@ class App extends React.Component {
   }
 }
 
-// flex: grow, shrink, basis
-
 const styles = theme => ({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
-    backgroundColor: 'purple',
+
   },
   header: {
-    backgroundColor: 'red',
     flexBasis: '20%',
     flexShrink: 0,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   main: {
     padding: '3%',
-    backgroundColor: 'green',
     flexBasis: '60%',
-
   },
   footer: {
-    backgroundColor: 'blue',
     flexBasis: '20%',
   },
   title: {

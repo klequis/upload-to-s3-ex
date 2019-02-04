@@ -80,14 +80,12 @@ const rejectStyle = {
 }
 
 const dropzoneStyle = {
-  backgroundColor: 'orange',
   width: '100%',
   height: '100%',
 }
 
 const styles = theme => ({
   wrapper: {
-    backgroundColor: 'orange',
     width: '100%',
   },
   fab: {
