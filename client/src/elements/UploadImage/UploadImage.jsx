@@ -87,6 +87,7 @@ const dropzoneStyle = {
 const styles = theme => ({
   wrapper: {
     width: '100%',
+    marginBottom: theme.spacing.unit * 6,
   },
   fab: {
     position: 'absolute',

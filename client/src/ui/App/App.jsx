@@ -10,16 +10,18 @@ class App extends React.Component {
     const { classes } = this.props
     return (
       <div id='App-wrapper-main' className={classes.wrapper}>
-          <header className={classes.header}>
-            <Text h1 noMargin align='center' className={classes.title}>Upload Images to AWS S3</Text>
-          </header>
-          <main className={classes.main}>
+        <header className={classes.header}>
+          <Text h1 noMargin align='center' className={classes.title}>Upload Images to AWS S3</Text>
+        </header>
+        <main className={classes.main}>
+          <div className={classes.mainWidth}>
             <UploadImage />
             <ImagesList />
-          </main>
-          <footer className={classes.footer}>
-            <Footer />
-          </footer>
+          </div>
+        </main>
+        <footer className={classes.footer}>
+          <Footer />
+        </footer>
       </div>
     )
   }
@@ -41,6 +43,11 @@ const styles = theme => ({
   main: {
     padding: '3%',
     flexBasis: '60%',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  mainWidth: {
+    maxWidth: 781,
   },
   footer: {
     flexBasis: '20%',
