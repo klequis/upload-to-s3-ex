@@ -36,7 +36,7 @@ const styles = theme => {
       boxShadow: 'inset 0 1px 0 0 rgba(255, 255, 255, 0.075)',
       margin: `${spUnit}px 0`,
       [theme.breakpoints.up('md')]: {
-        margin: 16,
+        // margin: 16,
         padding: 8,
       },
     },
