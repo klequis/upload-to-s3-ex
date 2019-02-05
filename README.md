@@ -2,9 +2,9 @@
 
 
 ## To Do
-- [ ] did not capture the focus and hover styles for the Raised button - do so
+- [x] did not capture the focus and hover styles for the Raised button - do so
 - [ ] client: handle s3 upload error
-- [ ] change request-reducers.imagesList to 'images'
+- [x] change request-reducers.imagesList to 'images'
 - [ ] finish readme
 - [x] vertically center name text in row. How to use flex box with textOverflow?
 - [x] files are being uploaded but UI is not showing them. Error in console: Failed to load resource ...
@@ -26,8 +26,8 @@ File: src/store/image-actions.js
 
 | Name | Key | Public/Private |
 | ---- | --- | -------------- |
-| imagesList | imagesListKey | Private |
-| imagesListRequest | imagesListRequest | Public |
+| imagesRead | imagesReadKey | Private |
+| imagesReadRequest | imagesReadRequest | Public |
 | uploadOneImage | uploadOneImageKey | Private |
 | imageUploadOneRequest | imageUploadOneRequestKey | Public |
 | imagesDeleteOne | imagesDeleteOneKey | Private |
@@ -37,7 +37,7 @@ File: src/store/image-actions.js
 | Name | Keys | File |
 | ---- | ---- | ---- |
 | imageUpload | imageUploadOneKey | src/store/reducers/image-reducers.js |
-| imagesList | imagesListKey, imagesDeleteOneKey | src/store/reducers/image-reducers.js |
+| images | imagesReadKey, imagesDeleteOneKey | src/store/reducers/image-reducers.js |
 
 ## Selectors
 | Name | Returns |

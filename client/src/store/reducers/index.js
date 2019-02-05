@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux'
 import requests from './requests'
-import { imagesList, imageUpload } from './image-reducers'
-
+import { images, imageUpload } from './image-reducers'
 
 export default combineReducers({
-  imagesList,
+  images,
   imageUpload,
   requests,
 })

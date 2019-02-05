@@ -8,10 +8,8 @@ import { getRequestStatus } from 'store/selectors/request-selectors'
 import {
   imagesDeleteOneRequest,
   imagesDeleteOneRequestKey,
-  imageUploadOneRequest,
-  imageUploadOneRequestKey,
-  imagesListRequest,
-  imagesListRequestKey,
+  imagesReadRequest,
+  imagesReadRequestKey,
 } from 'store/actions/image-actions'
 
 import Row from './Row'
@@ -20,7 +18,7 @@ import { green } from 'logger'
 class ImagesList extends React.Component {
 
   getImages = () => {
-    this.props.imagesListRequest(this.props.maxKeys)
+    this.props.imagesReadRequest(this.props.maxKeys)
   }
 
   componentDidMount() {
@@ -32,9 +30,9 @@ class ImagesList extends React.Component {
   }
 
   render () {
-    const { classes, images, imagesDeleteOneRequestStatus, imagesListRequestStatus } = this.props
+    const { images, imagesDeleteOneRequestStatus, imagesReadRequestStatus } = this.props
 
-    if (imagesListRequestStatus !== 'success') {
+    if (imagesReadRequestStatus !== 'success') {
       return null
     }
 
@@ -43,13 +41,12 @@ class ImagesList extends React.Component {
     }
 
     return (
-      <div id='ImagesList-wrapper' className={classes.wrapper}>
+      <div id='ImagesList-wrapper'>
         {
           images.map(i => {
             return (
               <Row
                 key={i.Key}
-                className={classes.row}
                 deleteImage={this.deleteImage}
                 image={i}
               />
@@ -61,24 +58,16 @@ class ImagesList extends React.Component {
   }
 }
 
-const styles = theme => ({
-  wrapper: {
-    // backgroundColor: 'green',
-    // padding: '16px 0'
-  }
-})
-
-const actions = { imagesListRequest, imagesDeleteOneRequest }
+const actions = { imagesReadRequest, imagesDeleteOneRequest }
 
 const mstp = (state) => {
   return {
     images: getImages(state),
-    imagesListRequestStatus: getRequestStatus(state, imagesListRequestKey),
+    imagesReadRequestStatus: getRequestStatus(state, imagesReadRequestKey),
     imagesDeleteOneRequestStatus: getRequestStatus(state, imagesDeleteOneRequestKey)
   }
 }
 
 export default compose(
-  injectSheet(styles),
   connect(mstp, actions)
 )(ImagesList)

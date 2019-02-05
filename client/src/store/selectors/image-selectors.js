@@ -3,7 +3,6 @@ import { yellow } from 'logger'
 
 export const getUploadedImageUrl = (state) => {
   const imageUrl = state.imageUpload.imageUrl || 'none'
-
   if (!(imageUrl === 'none')) {
     return imageUrl
   } else {
@@ -21,7 +20,5 @@ export const getUploadedImageName = (state) => {
 }
 
 export const getImages = (state) => {
-  // yellow('state', state.imagesList.data)
-  // yellow('state', state.imagesList)
-  return state.imagesList
+  return state.images
 }

@@ -1,7 +1,7 @@
 import { remove } from 'ramda'
 import {
   imagesDeleteOneKey,
-  imagesListKey,
+  imagesReadKey,
   imageUploadOneKey,
 } from '../actions/image-actions'
 
@@ -29,21 +29,14 @@ export const imageUpload = (state = {}, { type, payload }) => {
   }
 }
 
-export const imagesList = (state = [], { type, payload }) => {
-  // blue('imagesList: state', state)
-  // blue('imagesList: type', type)
-
+export const images = (state = [], { type, payload }) => {
   switch (type) {
-    case imagesListKey:
-      // blue('imagesList: payload', payload.images.data.images)
+    case imagesReadKey:
       return payload.images.data.images
     case imagesDeleteOneKey:
-      const m = removeImage(state, payload.key)
-      // blue('m', m)
-      return m
+      return removeImage(state, payload.key)
     default:
       return state
   }
-
 }
 

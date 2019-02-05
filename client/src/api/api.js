@@ -6,10 +6,7 @@ import { pink } from 'logger'
 
 export default {
   images: {
-    async list(maxKeys) {
-      // const maxKeys = JSON.stringify({ maxKeys: 30 })
-      pink('images.list')
-
+    async read(maxKeys) {
       try {
         const data = await fetchJson(
           '/api/images',
@@ -18,8 +15,6 @@ export default {
             // body: maxKeys,
           }
           )
-          // pink('api.images.list: data', data)
-          // pink('api.images.list: data.images', data.images)
         return { data }
       }
       catch (e) {
@@ -28,7 +23,6 @@ export default {
       }
     },
     create(formData) {
-      pink('images.create')
       return fetchUploadImage(
         '/api/images',
         {
@@ -36,7 +30,6 @@ export default {
           body: formData
         }
       ).then(data => {
-        pink('images.create: data', data)
         return data
       }).catch(e => {
         const error = e.error
@@ -44,7 +37,6 @@ export default {
       })
     },
     async delete(key) {
-      pink('images.delete')
       try {
         const data = await fetchJson(
           `/api/images/${key}`,

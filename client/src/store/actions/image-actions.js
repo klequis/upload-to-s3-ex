@@ -2,21 +2,21 @@ import { createRequestThunk, logError } from './action-helpers'
 import api from 'api'
 import { /* orange,*/ red } from 'logger'
 
-// Read/List
-export const imagesListRequestKey = 'imagesListRequestKey'
-export const imagesListKey = 'imagesListKey'
+// Read
+export const imagesReadRequestKey = 'imagesReadRequestKey'
+export const imagesReadKey = 'imagesReadKey'
 
-const imagesList = (images) => {
+const imagesRead = (images) => {
   return ({
-    type: imagesListKey,
+    type: imagesReadKey,
     payload: { images }
   })
 }
 
-export const imagesListRequest = createRequestThunk({
-  request: api.images.list,
-  key: imagesListRequestKey,
-  success: [ imagesList ],
+export const imagesReadRequest = createRequestThunk({
+  request: api.images.read,
+  key: imagesReadRequestKey,
+  success: [ imagesRead ],
   // failure: [ (e) => console.log(e)]
 })
 
@@ -33,7 +33,7 @@ const uploadOneImage = (imageInfo) => ({
 export const imageUploadOneRequest = createRequestThunk({
   request: api.images.create,
   key: imageUploadOneRequestKey,
-  success: [ uploadOneImage, imagesListRequest ],
+  success: [ uploadOneImage, imagesReadRequest ],
   failure: [ error => logError(error, imageUploadOneRequestKey) ],
 })
 
