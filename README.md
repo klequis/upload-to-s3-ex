@@ -1,24 +1,31 @@
+# Upload Images to AWS S3
+
+A demo app for uploading, listing and deleting images in an AWS S3 bucket using (primarily)
+- Client:  React, Redux, react-dropzone & react-jss
+- Server: AWS SDK, Express
+
+Server uses async/await for all calls. [pify](https://www.npmjs.com/package/pify) is used to promisify NodeJS calls.
+
+## Usage
+To run the app you will need an AWS account & a S3 bucket with proper access. There are more than one way to handle AWS credentials. For this app I have the keys in ~/.aws. Doing otherwise may require a code change. Consult the AWS documentation for more information.
+
+```js
+$ git clone https://github.com/klequis/upload-to-s3-ex.git
+$ cd server
+$ yarn install
+$ yarn start
+// new terminal
+$ cd client
+$ yarn install
+$ yarn start
+```
+- Create a .env file using server/dot-env-sample as a template
 
 
-
-## To Do
-- [x] did not capture the focus and hover styles for the Raised button - do so
-- [ ] client: handle s3 upload error
-- [x] change request-reducers.imagesList to 'images'
-- [ ] finish readme
-- [x] vertically center name text in row. How to use flex box with textOverflow?
-- [x] files are being uploaded but UI is not showing them. Error in console: Failed to load resource ...
-- [x] delete button should be horizontally centered
-
-## Requirements
-1. An AWS account
-1. An AWS S3 bucket configured to accept uploads
-1. Credentials - in home directory
 ### Helpful links
+- https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html
 - https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html
 - https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-shared.html
-- https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html
-
 
 ## Actions
 
