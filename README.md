@@ -6,7 +6,7 @@ A demo app for uploading, listing and deleting images in an AWS S3 bucket using 
 
 Server uses async/await for all calls. [pify](https://www.npmjs.com/package/pify) is used to promisify NodeJS calls.
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
+<a href="https://youtu.be/H9FY7U5O7dU
 " target="_blank"><img src="https://github.com/klequis/upload-to-s3-ex/blob/master/screenshot.png"
 alt="upload to s3 app screenshot" width="630" height="828" border="10" /></a>
 
