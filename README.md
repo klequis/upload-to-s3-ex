@@ -8,7 +8,7 @@ Server uses async/await for all calls. [pify](https://www.npmjs.com/package/pify
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
 " target="_blank"><img src="https://github.com/klequis/upload-to-s3-ex/blob/master/screenshot.png"
-alt="upload to s3 app screenshot" width="240" height="180" border="10" /></a>
+alt="upload to s3 app screenshot" width="630" height="828" border="10" /></a>
 
 
 ## Usage
