@@ -15,6 +15,5 @@ export default function configureStore() {
   } else {
     store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
   }
-
   return store
 }
