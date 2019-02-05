@@ -30,7 +30,6 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     height: '100vh',
-
   },
   header: {
     flexBasis: '20%',

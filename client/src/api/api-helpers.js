@@ -14,17 +14,7 @@ const rejectErrors = (res) => {
     error: res.json()
   })
 }
-
-  // let er = ''
-  // try {
-  //   er = res.json()
-  // }
-  // catch (e) {
-  //   console.log('unknown error')
-  // }
-
 export const fetchJson = (url, options = {}) => {
-  pink('fetchJson: url', url)
   let headers = {
     ...options.headers,
     'Accept': 'application/json',

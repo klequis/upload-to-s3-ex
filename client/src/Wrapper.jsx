@@ -30,9 +30,6 @@ const styles = theme => ({
       },
     },
     body: {
-      // height: '100vh',
-      // display: 'flex',
-      // flexDirection: 'column',
       backgroundColor: '#212121',
       margin: 0,
       padding: 0,
@@ -45,7 +42,6 @@ const styles = theme => ({
       '@media print': {
         minWidth: 320,
       },
-      // backgroundColor: 'red',
     },
     '*, *::before, *::after': {
       boxSizing: 'inherit',
@@ -53,9 +49,6 @@ const styles = theme => ({
     p: {
       margin: 0,
     },
-    '#root': {
-      // height: '100%',
-    }
   },
 
 })

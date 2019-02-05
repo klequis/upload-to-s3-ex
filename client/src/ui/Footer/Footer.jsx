@@ -69,7 +69,6 @@ const styles = theme => ({
 
   },
   links: {
-    // backgroundColor: 'red',
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -83,20 +82,9 @@ const styles = theme => ({
     }
   },
   linkRow: {
-    // width: '100%',
     display: 'flex',
     justifyContent: 'space-evenly',
-
     margin: '0.5rem 0',
-    [theme.breakpoints.up('md')]: {
-      // display: 'flex',
-      // justifyContent: 'space-around',
-      // // eslint-disable-next-line
-      // justifyContent: 'space-evenly',
-      // width: '100%',
-      // paddingTop: '0.25rem',
-      // paddingBottom: '0.25rem',
-    }
   },
   logo: {
     maxHeight: 40,

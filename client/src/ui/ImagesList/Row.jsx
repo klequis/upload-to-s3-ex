@@ -10,18 +10,14 @@ const Row = ({ classes, deleteImage, image }) => {
       <div className={classes.img}>
         <ResponsiveImage src={image.url} key={image.Key} alt='unknown' />
       </div>
-
       <div className={classes.name}>
         <div className={classes.nameText}>{image.Key}</div>
-        {/* {image.Key} */}
       </div>
-
       <div className={classes.button}>
         <RaisedButton
           aria-label="Delete"
           className={classes.fab}
           onClick={() => deleteImage(image.Key)}
-
         >
           <img src={iTrashcan} alt='delete' />
         </RaisedButton>
@@ -30,65 +26,46 @@ const Row = ({ classes, deleteImage, image }) => {
   )
 }
 
-const greyValue = 100
-
 const styles = theme => {
   const spUnit = theme.spacing.unit
 
   return {
-
     row: {
       display: 'flex',
       backgroundColor:' #424242',
       boxShadow: 'inset 0 1px 0 0 rgba(255, 255, 255, 0.075)',
-
       margin: `${spUnit}px 0`,
       [theme.breakpoints.up('md')]: {
         margin: 16,
         padding: 8,
       },
-      backgroundColor:'red',
     },
     img: {
-
-
       [theme.breakpoints.up('md')]: {
         padding: 8,
       },
       display: 'flex',
       alignItems: 'center',
-
-
-      //
       flexBasis: '30%',
-      // maxWidth: 150,
-      backgroundColor:'green',
     },
     name: {
       color: 'white',
-
       padding: 8,
       display: 'flex',
       alignItems: 'center',
       verticalAlign: 'middle',
-      //
-
       flexBasis: '60%',
       minWidth: 0,
-      backgroundColor:'blue',
     },
     nameText: {
       textOverflow: 'ellipsis',
       overflow: 'hidden',
       whiteSpace: 'nowrap',
-
     },
     button: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-
-      //
       flexBasis: '10%',
     }
   }
